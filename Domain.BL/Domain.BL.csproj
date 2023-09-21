@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Interfaces\" />
-    <Folder Include="Services\Implemention\" />
+    <ProjectReference Include="..\Domain.DL\Domain.DL.csproj" />
+    <ProjectReference Include="..\Domain.Entities\Domain.Entities.csproj" />
   </ItemGroup>
 
 </Project>

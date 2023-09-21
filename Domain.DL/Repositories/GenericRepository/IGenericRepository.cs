@@ -11,11 +11,13 @@ namespace Domain.DL.Repositories.GenericRepository
     public interface IGenericRepository<T> where T : BaseEntity
     {
         IQueryable<T> GetAll();
-        T Add(T item);
-        void deletebyid(int id);
-        void update(T item);
-        T GetByID(int id);
-        //  Task<T> GetByIdAsync(int id, params Expression<Func<T, object>>[] includes);
+        Task<T> Add(T item);
+        void Delete(int id);
+        T update(T item);
+        Task<T?> GetByID(int id);
         IQueryable<T> Get(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes);
+        int SaveChange();
+        Task<int> SaveChangeAsync();
     }
+
 }
