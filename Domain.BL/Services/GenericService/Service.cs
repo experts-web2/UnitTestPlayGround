@@ -19,21 +19,27 @@ namespace Domain.BL.Services.GenericService
         public async Task<TEntity?> GetByIdAsync(int id)
         => await _repository.GetByID(id);
 
-        public IEnumerable<TEntity> GetAllAsync()
+        public IEnumerable<TEntity> GetAll()
          => _repository.GetAll();
 
-        public async Task CreateAsync(TEntity entity)
+        public async Task<TEntity> CreateAsync(TEntity entity)
         {
-            await _repository.Add(entity);
+           var added = await _repository.Add(entity);
+            _repository.SaveChange();
+            return added;
         }
 
-        public TEntity UpdateAsync(TEntity entity)
-        => _repository.update(entity);
-        
+        public TEntity Update(TEntity entity)
+        {
+           var updatedEntity = _repository.update(entity);
+            _repository.SaveChange();
+            return updatedEntity;
+        }
 
-        public void DeleteAsync(int id)
+        public void Delete(int id)
         {
              _repository.Delete(id);
+            _repository.SaveChange();
         }
     }
 }

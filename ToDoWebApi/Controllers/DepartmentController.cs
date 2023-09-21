@@ -19,8 +19,29 @@ namespace ToDoWebApi.Controllers
         [HttpGet]
         public IActionResult GetAllDepartments()
         {
-           var getDepartment = _entityService.GetAllAsync().ToList();
+           var getDepartment = _entityService.GetAll().ToList();
             return Ok(getDepartment);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddDepartment(Department department)
+        {
+            var Department =await _entityService.CreateAsync(department);
+            return Ok(Department);
+        }
+
+        [HttpPut]
+        public IActionResult UpdateDepartment(Department department)
+        {
+            var Department = _entityService.Update(department);
+            return Ok(Department);
+        }
+
+        [HttpDelete]
+        public IActionResult DeleteDepartment(int Id)
+        {
+             _entityService.Delete(Id);
+            return Ok("Deleted");
         }
     }
 }

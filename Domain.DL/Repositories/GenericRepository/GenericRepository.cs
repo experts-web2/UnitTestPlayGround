@@ -25,8 +25,7 @@ namespace Domain.DL.Repositories.GenericRepository
 
         public void Delete(int id)
         {
-            T entity = new ();
-            entity.Id = id;
+            var entity = _dbSet.FirstOrDefault(x => x.Id == id);
             _dbSet.Remove(entity);
         }
 
